@@ -18,7 +18,7 @@ if [ -z "$loop" ]; then
   exit 1
 fi
 
-dd if=/dev/zero of="${boot_img_name}" bs=1M count=600 status=progress
+dd if=/dev/zero of="${boot_img_name}" bs=1M count=800 status=progress
 if [ $? -ne 0 ]; then
   echo "Error: Failed to create boot image."
   exit 1
