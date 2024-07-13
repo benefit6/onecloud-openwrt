@@ -10,6 +10,15 @@
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 #
 
+function git_sparse_clone() {
+  branch="$1" repourl="$2" && shift 2
+  git clone --depth=1 -b $branch --single-branch --filter=blob:none --sparse $repourl
+  repodir=$(echo $repourl | awk -F '/' '{print $(NF)}')
+  cd $repodir && git sparse-checkout set $@
+  mv -f $@ ../
+  cd .. && rm -rf $repodir
+}
+
 # Uncomment a feed source
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
@@ -18,9 +27,17 @@ echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-pa
 echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git;main" >> "feeds.conf.default"
 echo 'src-git dns https://github.com/sbwml/luci-app-mosdns' >>feeds.conf.default
 echo 'src-git xd https://github.com/shiyu1314/openwrt-packages' >>feeds.conf.default
-echo "src-git kiddin9 https://github.com/kiddin9/openwrt-packages.git;master" >> "feeds.conf.default"
+echo "src-git kenzok8 https://github.com/kenzok8/small-package;master" >> "feeds.conf.default"
 
-git clone https://github.com/sbwml/luci-app-alist package/alist
-git clone https://github.com/rufengsuixing/luci-app-onliner package/onliner
-git clone -b js https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic package/luci-app-unblockneteasemusic
-git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages alist
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-alist
+git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
+
+git clone -b master --depth 1 --single-branch https://github.com/rufengsuixing/luci-app-onliner package/onliner
+git clone -b js --depth 1 --single-branch https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic package/luci-app-unblockneteasemusic
+git clone -b 18.06 --depth 1 --single-branch https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
+
+./scripts/feeds update -a
+cp -rf luci-app-alist package
+cp -rf alist package
+cp -rf luci-app-openclash package
