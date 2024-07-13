@@ -34,6 +34,7 @@ git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-ali
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
 
 git clone -b master --depth 1 --single-branch https://github.com/rufengsuixing/luci-app-onliner package/onliner
+git clone -b main --depth 1 --single-branch https://github.com/sirpdboy/luci-app-advancedplus package/advancedplus
 git clone -b js --depth 1 --single-branch https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic package/luci-app-unblockneteasemusic
 git clone -b 18.06 --depth 1 --single-branch https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 
