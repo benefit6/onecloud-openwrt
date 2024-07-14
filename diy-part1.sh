@@ -27,7 +27,7 @@ echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-pa
 echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git;main" >> "feeds.conf.default"
 echo 'src-git dns https://github.com/sbwml/luci-app-mosdns' >>feeds.conf.default
 echo 'src-git xd https://github.com/shiyu1314/openwrt-packages' >>feeds.conf.default
-echo "src-git kenzok8 https://github.com/kenzok8/small-package;master" >> "feeds.conf.default"
+echo "src-git kenzok8 https://github.com/kenzok8/small-package.git;main" >> "feeds.conf.default"
 
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages alist
 git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-alist
